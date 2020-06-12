@@ -26,5 +26,21 @@ namespace ChoseCaffeSql
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Enter Login");
+            }else if (textBox2.Text == "")
+            {
+                MessageBox.Show("Enter Password");
+            }
+            else
+            {
+                MessageBox.Show("You are SignIn");
+                this.Close();
+            }
+        }
     }
 }

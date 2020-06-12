@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Data;
 
 namespace ChoseCaffeSql
 {
@@ -13,9 +14,23 @@ namespace ChoseCaffeSql
         string connectionString;
         SqlConnection connection;
         bool isConnectionOpen = false;
+        /// <summary>
+        /// Get True if connection to DB is open
+        /// </summary>
         public bool IsConnectionOpen => isConnectionOpen;
+        /// <summary>
+        /// 
+        /// </summary>
         public SqlConnection Connection => connection;
+        /// <summary>
+        /// 
+        /// </summary>
         public string ConectionString => connectionString;
+        /// <summary>
+        /// Create object for used DB
+        /// </summary>
+        /// <param name="serverName">Name of Your DB Server</param>
+        /// <param name="DBName">Name of Your Table on Server</param>
         public SQLDataBase(string serverName, string DBName)
         {
             connectionString = @"Data Source="+serverName+ ";Initial Catalog="+DBName+";Integrated Security=True";
@@ -35,41 +50,31 @@ namespace ChoseCaffeSql
                 throw e;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public void ConnectionOpen()
         {
             if (isConnectionOpen)
                 return;
             ConectToDB();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void Close()
         {
             connection.Close();
             isConnectionOpen = false;
         }
         /// <summary>
-        /// insert into tablename (content.columns) values (content.values)
+        /// Add values to DB 
         /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="content"></param>
-        /// <returns></returns>
-        public string Insert(string tableName, Dictionary<string,string> content)
+        /// <param name="sqlQuery">your sql query (insert)</param>
+        /// <returns>return id of added values</returns>
+        public string Insert(string sqlQuery)
         {
-            //"insert into tablename (name, age) otput values('Maria', 19)"
-            // content = {
-            //              "name": "'MAria'",
-            //              "age": "19"
-            //           }
-            try
-            {
-                string keys = "", vals = "";
-                foreach (string key in content.Keys)
-                {
-                    keys += key + ", ";
-                    vals += content[key] + ", ";
-                }
-                string sqlQuery = "insert into " + tableName + " (" + keys.Substring(0, keys.Length - 2) +
-                                  ") values (" + vals.Substring(0, vals.Length - 2) + ");";
+            
                 sqlQuery += "\nSELECT SCOPE_IDENTITY();";
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
                 SqlDataReader reader = command.ExecuteReader();
@@ -81,11 +86,36 @@ namespace ChoseCaffeSql
                 }
                 reader.Close();
                 return id;
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
+        }
+        public int Delete(string sqlQuery)
+        {
+            /*
+             delete from table_name 
+             where id > 1
+             */
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+            int n = command.ExecuteNonQuery();
+            return n;
+        }
+        public int Update(string sqlQuery)
+        {
+            /*Update from table name set
+             name = 'new_name',
+             ...
+             where condition
+             */
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+            int n = command.ExecuteNonQuery();
+            return n;
+        }
+        public DataSet Select(string command)
+        {
+            SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand(command, connection));
+            DataSet dataSet = new DataSet();
+            adapter.Fill(dataSet);
+            adapter.Dispose();
+            return dataSet;
         }
     }
-}
+}     

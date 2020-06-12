@@ -36,7 +36,9 @@ namespace ChoseCaffeSql
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            SignUpOwner signUpOwner = new SignUpOwner();
+            signUpOwner.Show();
+            this.Close();
         }
     }
 }

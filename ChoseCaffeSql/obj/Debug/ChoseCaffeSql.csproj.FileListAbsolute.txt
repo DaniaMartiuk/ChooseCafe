@@ -29,3 +29,4 @@ G:\C#\ChoseCaffeSql\ChoseCaffeSql\obj\Debug\ChoseCaffeSql.csproj.GenerateResourc
 G:\C#\ChoseCaffeSql\ChoseCaffeSql\obj\Debug\ChoseCaffeSql.csproj.CoreCompileInputs.cache
 G:\C#\ChoseCaffeSql\ChoseCaffeSql\obj\Debug\ChoseCaffeSql.exe
 G:\C#\ChoseCaffeSql\ChoseCaffeSql\obj\Debug\ChoseCaffeSql.pdb
+G:\C#\ChoseCaffeSql\ChoseCaffeSql\obj\Debug\ChoseCaffeSql.SignUpUser.resources

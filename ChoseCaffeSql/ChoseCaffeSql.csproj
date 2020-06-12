@@ -84,6 +84,12 @@
     <Compile Include="SignUpOwner.Designer.cs">
       <DependentUpon>SignUpOwner.cs</DependentUpon>
     </Compile>
+    <Compile Include="SignUpUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SignUpUser.Designer.cs">
+      <DependentUpon>SignUpUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="SQLDataBase.cs" />
     <Compile Include="UserOrOwner.cs">
       <SubType>Form</SubType>
@@ -118,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SignUpOwner.resx">
       <DependentUpon>SignUpOwner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SignUpUser.resx">
+      <DependentUpon>SignUpUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserOrOwner.resx">
       <DependentUpon>UserOrOwner.cs</DependentUpon>

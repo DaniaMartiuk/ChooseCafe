@@ -105,11 +105,14 @@ namespace ChoseCaffeSql
                 MessageBox.Show("Select your location");
                 return;
             }
-            string idLoc = AddDB(NamesTables["location"], contentLocation);
+            string idLoc = AddDB(tableNames.location, contentLocation);
             content.Add("location_id", idLoc);
-            string res = AddDB(NamesTables["visitor"], content);
-            MessageBox.Show("Thank you to Sign Up your id is " + res);
-            this.Close();
+            string res = AddDB(tableNames.visitor, content);
+            if (res != null)
+            {
+                MessageBox.Show("Thank you to Sign Up your id is " + res);
+                this.Close();
+            }
         }
     }
 }
